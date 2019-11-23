@@ -2,6 +2,8 @@ function IsLeapYear(year: integer): boolean := false;
 function DaysInMonth(month, day: integer): integer := 0;
 function LaterInDay(p1, p2: DateTime): DateTime := p1;
 function LaterInYear(p1, p2: DateTime): DateTime := p1;
+function DaysInYear(year: integer): integer := 0;
+function DaysInYearRange(year1, year2: integer): integer := 0;
 
 procedure TestIsLeapYear();
 begin
@@ -37,9 +39,25 @@ begin
 	var p1 := new DateTime(2005, 7,  11);
 	var p1 := new DateTime(2020, 2, 20);
 
-	assert(LaterInYear(p2, p1) = p1, 'TestrLaterInYear fails on 21.11 and 11.7');
-	assert(LaterInYear(p2, p3) = p2, 'TestrLaterInYear fails on 20.2 and 11.7');
-	assert(LaterInYear(p3, p1) = p1, 'TestrLaterInYear fails on 21.11 and 20.2');
+	assert(LaterInYear(p2, p1) = p1, 'TestLaterInYear fails on 21.11 and 11.7');
+	assert(LaterInYear(p2, p3) = p2, 'TestLaterInYear fails on 20.2 and 11.7');
+	assert(LaterInYear(p3, p1) = p1, 'TestLaterInYear fails on 21.11 and 20.2');
+end;
+
+procedure TestDaysInYear();
+begin
+	assert(DaysInYear(2000) = 366, 'TestDaysInYear fails on 2000');
+	assert(DaysInYear(2001) = 365, 'TestDaysInYear fails on 2001');
+	assert(DaysInYear(1600) = 366, 'TestDaysInYear fails on 1600');
+	assert(DaysInYear(1900) = 365, 'TestDaysInYear fails on 1900');
+end;
+
+procedure TestDaysInYearRange();
+begin
+	assert(DaysInYearRange(2000, 2000) = 366, 'TestDaysInYear fails on 2000..2000');
+	assert(DaysInYearRange(2000, 2004) = 1827, 'TestDaysInYear fails on 2000..2004');
+	assert(DaysInYearRange(1999, 2001) = 1096, 'TestDaysInYear fails on 1999..2001');
+	assert(DaysInYearRange(2050, 2100) = 18627, 'TestDaysInYear fails on 2050..2100');
 end;
 
 begin
