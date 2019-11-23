@@ -4,6 +4,7 @@ function LaterInDay(p1, p2: DateTime): DateTime := p1;
 function LaterInYear(p1, p2: DateTime): DateTime := p1;
 function DaysInYear(year: integer): integer := 0;
 function DaysInYearRange(year1, year2: integer): integer := 0;
+function SecondsInHours(hours: integer): integer := 0;
 
 procedure TestIsLeapYear();
 begin
@@ -36,8 +37,8 @@ end;
 procedure TestrLaterInYear();
 begin
 	var p1 := new DateTime(1999, 11, 21);
-	var p1 := new DateTime(2005, 7,  11);
-	var p1 := new DateTime(2020, 2, 20);
+	var p2 := new DateTime(2005, 7,  11);
+	var p3 := new DateTime(2020, 2, 20);
 
 	assert(LaterInYear(p2, p1) = p1, 'TestLaterInYear fails on 21.11 and 11.7');
 	assert(LaterInYear(p2, p3) = p2, 'TestLaterInYear fails on 20.2 and 11.7');
@@ -58,6 +59,13 @@ begin
 	assert(DaysInYearRange(2000, 2004) = 1827, 'TestDaysInYear fails on 2000..2004');
 	assert(DaysInYearRange(1999, 2001) = 1096, 'TestDaysInYear fails on 1999..2001');
 	assert(DaysInYearRange(2050, 2100) = 18627, 'TestDaysInYear fails on 2050..2100');
+end;
+
+procedure TestSecondsInHours();
+begin
+	assert(SecondsInHours(1) = 60*60, 'TestSecondsInHours fails on 1');
+	assert(SecondsInHours(2) = 2*60*60, 'TestSecondsInHours fails on 2');
+	assert(SecondsInHours(0) = 0, 'TestSecondsInHours fails on 0');
 end;
 
 begin
