@@ -1,0 +1,47 @@
+function IsLeapYear(year: integer): boolean := false;
+function DaysInMonth(month, day: integer): integer := 0;
+function LaterInDay(p1, p2: DateTime): DateTime := p1;
+function LaterInYear(p1, p2: DateTime): DateTime := p1;
+
+procedure TestIsLeapYear();
+begin
+	assert(IsLeapYear(2004), 'TestIsLeapYear fails on 2004');
+	assert(IsLeapYear(1812), 'TestIsLeapYear fails on 1812');
+	assert(IsLeapYear(2003), 'TestIsLeapYear fails on 2003');
+	assert(IsLeapYear(1999), 'TestIsLeapYear fails on 1999');
+end;
+
+procedure TestDaysInMonth();
+begin
+	assert(DaysInMonth(1, 1999) = 31, 'TestDaysInMonth fails on Janyary 1999');
+	assert(DaysInMonth(2, 2004) = 28, 'TestDaysInMonth fails on February 2004');
+	assert(DaysInMonth(4, 2019) = 30, 'TestDaysInMonth fails on February 2004');
+	assert(DaysInMonth(5, 1967) = 31, 'TestDaysInMonth fails on February 2004');
+end;
+
+procedure TestLaterInDay();
+begin
+	var p1 := new DateTime(2019, 11, 21, 14, 12, 10);
+	var p2 := new DateTime(2019, 11, 11, 15, 12, 10);
+	var p3 := new DateTime(2008, 6,  3,  14, 20, 10);
+	var p4 := new DateTime(1999, 7,  11, 14, 12, 44);
+
+	assert(LaterInDay(p2, p1) = p2, 'TestLaterInDay fails on 14:12:10 and 15:12:10');
+	assert(LaterInDay(p1, p3) = p3, 'TestLaterInDay fails on 14:12:10 and 14:20:10');
+	assert(LaterInDay(p4, p1) = p4, 'TestLaterInDay fails on 14:12:10 and 14:12:44');
+end;
+
+procedure TestrLaterInYear();
+begin
+	var p1 := new DateTime(1999, 11, 21);
+	var p1 := new DateTime(2005, 7,  11);
+	var p1 := new DateTime(2020, 2, 20);
+
+	assert(LaterInYear(p2, p1) = p1, 'TestrLaterInYear fails on 21.11 and 11.7');
+	assert(LaterInYear(p2, p3) = p2, 'TestrLaterInYear fails on 20.2 and 11.7');
+	assert(LaterInYear(p3, p1) = p1, 'TestrLaterInYear fails on 21.11 and 20.2');
+end;
+
+begin
+
+end.
